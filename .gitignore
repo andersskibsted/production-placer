@@ -1,0 +1,49 @@
+# ========================
+# Backend
+# ========================
+backend/.venv/
+backend/.env
+backend/__pycache__/
+backend/**/__pycache__/
+*.pyc
+*.pyo
+
+# ========================
+# Frontend
+# ========================
+
+# Afhængigheder
+frontend/node_modules/
+
+# Build output
+frontend/dist/
+frontend/dist-ssr/
+
+# Cache
+frontend/.vite/
+frontend/**/.cache/
+
+# Lokale env filer
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+
+# Logs
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# ========================
+# Generelt
+# ========================
+.DS_Store
+Thumbs.db
+*.log
+.idea
+tmp/
+
+*.py[cod]
+*.egg
+build
+htmlcov
+
