@@ -6,6 +6,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Config:
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    DATABASE_URL = os.environ["DATABASE_URL"]
     DEBUG = os.getenv("FLASK_DEBUG", "false").lower() == "true"
+    SECRET_KEY = os.environ.get("FLASK_SECRET_KEY", "dev-key")
