@@ -1,15 +1,16 @@
-// async function get<T>(url: string): Promise<T> {
-//   const res = await fetch(url)
-//   if (!res.ok) throw new Error(`API fejl: ${res.status}`)
-//   return res.json()
-// }
+const BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:5000";
 
-// export const api = { get }
-async function get<T>(url: string): Promise<T> {
-  const res = await fetch(url)
-  console.log('Status:', res.status, 'URL:', url)
-  if (!res.ok) throw new Error(`API fejl: ${res.status}`)
-  return res.json()
+export async function request<T>(path: string, options?: RequestInit): Promise<T> {
+  const response = await fetch(`${BASE_URL}${path}`, {
+    headers: { "Content-Type": "application/json" },
+    ...options,
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}`);
+  }
+
+  return response.json() as Promise<T>;
 }
 
-export const api = { get }
+export const get = <T>(path: string) => request<T>(path);

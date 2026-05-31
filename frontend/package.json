@@ -16,7 +16,8 @@
     "react-dom": "^19.2.5",
     "react-router-dom": "^7.15.0",
     "recharts": "^3.8.1",
-    "tailwind": "^4.0.0"
+    "tailwind": "^4.0.0",
+    "tone": "^15.1.22"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
