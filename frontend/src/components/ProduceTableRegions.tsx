@@ -1,20 +1,20 @@
 // src/components/ui/ProductionTable.tsx
 import { useState } from "react"
 import { useData } from "../context/DataContext"
-import { fetchProductionByYearCrop } from "../api/productions"
-import type { ProductionRegion } from "../api/types"
-import { DenmarkMap } from "./MapProductions"
+import { fetchProduceByYearCrop } from "../api/produce"
+import type { ProduceRegion } from "../api/types"
+import { DenmarkMap } from "./MapProduce"
 
-export function ProductionTableRegions() {
+export function ProduceTableRegions() {
     const { regions, crops } = useData()
     const [year, setYear] = useState<string>("")
     const [cropId, setCropId] = useState<number | null>(null)
-    const [data, setData] = useState<ProductionYear[]>([])
+    const [data, setData] = useState<ProduceYear[]>([])
     const [error, setError] = useState<string | null>(null)
 
     function handleFetch() {
         if (!year || !cropId) return
-        fetchProductionByYearCrop(year, cropId)
+        fetchProduceByYearCrop(year, cropId)
             .then(setData)
             .catch((err) => setError(err.message))
     }
@@ -52,7 +52,7 @@ export function ProductionTableRegions() {
                     {data.map((row) => (
                         <tr key={row.region}>
                             <td>{row.region}</td>
-                            <td>{row.amount ?? "ingen data"}</td>
+                            <td>{row.farms ?? "ingen data"}</td>
                         </tr>
                     ))}
                 </tbody>

@@ -1,14 +1,14 @@
 import { useState } from "react"
-import { fetchProductionByYear } from "../../api/productions"
-import type { ProductionByYear } from "../../api/types"
+import { fetchProduceByYear } from "../../api/produce"
+import type { ProduceByYear } from "../../api/types"
 
-export function ProductionByYear() {
+export function ProduceByYear() {
     const [year, setYear] = useState<string>("")
-    const [data, setData] = useState<ProductionByYear[]>([])
+    const [data, setData] = useState<ProduceByYear[]>([])
     const [error, setError] = useState<string | null>(null)
 
     function handleFetch() {
-        fetchProductionByYear(Number(year))
+        fetchProduceByYear(Number(year))
             .then(setData)
             .catch((err) => setError(err.message))
     }
