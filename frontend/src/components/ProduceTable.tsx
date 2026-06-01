@@ -1,19 +1,19 @@
+// src/components/ui/ProductionTable.tsx
 import { useState } from "react"
 import { useData } from "../context/DataContext"
-import { fetchProductionByYearRegionCrop } from "../api/productions"
-import type { ProductionByYearRegionCrop } from "../api/types"
+import { fetchProduceByRegionCrop } from "../api/produce"
+import type { ProduceYear } from "../api/types"
 
-export function ProductionSelector() {
+export function ProduceTable() {
     const { regions, crops } = useData()
-    const [year, setYear] = useState<string>("")
     const [regionId, setRegionId] = useState<number | null>(null)
     const [cropId, setCropId] = useState<number | null>(null)
-    const [data, setData] = useState<ProductionByYear[]>([])
+    const [data, setData] = useState<ProduceYear[]>([])
     const [error, setError] = useState<string | null>(null)
 
     function handleFetch() {
-        if (!regionId || !cropId || !year) return
-        fetchProductionByYearRegionCrop(Number(year), regionId, cropId)
+        if (!regionId || !cropId) return
+        fetchProduceByRegionCrop(regionId, cropId)
             .then(setData)
             .catch((err) => setError(err.message))
     }
@@ -32,19 +32,24 @@ export function ProductionSelector() {
                     <option key={c.crop_id} value={c.crop_id}>{c.name}</option>
                 ))}
             </select>
-            <input
-                type="number"
-                value={year}
-                onChange={(e) => setYear(e.target.value)}
-                placeholder="Indtast årstal"
-            />
             <button onClick={handleFetch}>Hent data</button>
             {error && <p>{error}</p>}
-            <div>
-                {data.map((row, i) => (
-                    <p key={i}>{row.region} - {row.crop} - {row.amount}</p>
-                ))}
-            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>År</th>
+                        <th>Produktion (mio. kg)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {data.map((row) => (
+                        <tr key={row.year}>
+                            <td>{row.year}</td>
+                            <td>{row.farms ?? "ingen data"}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     )
 }

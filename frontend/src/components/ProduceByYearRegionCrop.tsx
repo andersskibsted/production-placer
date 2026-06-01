@@ -1,19 +1,19 @@
-// src/components/ui/ProductionTable.tsx
 import { useState } from "react"
 import { useData } from "../context/DataContext"
-import { fetchProductionByRegionCrop } from "../api/productions"
-import type { ProductionYear } from "../api/types"
+import { fetchProduceByYearRegionCrop } from "../api/produce"
+import type { ProduceByYearRegionCrop } from "../api/types"
 
-export function ProductionTable() {
+export function ProduceSelector() {
     const { regions, crops } = useData()
+    const [year, setYear] = useState<string>("")
     const [regionId, setRegionId] = useState<number | null>(null)
     const [cropId, setCropId] = useState<number | null>(null)
-    const [data, setData] = useState<ProductionYear[]>([])
+    const [data, setData] = useState<ProduceByYear[]>([])
     const [error, setError] = useState<string | null>(null)
 
     function handleFetch() {
-        if (!regionId || !cropId) return
-        fetchProductionByRegionCrop(regionId, cropId)
+        if (!regionId || !cropId || !year) return
+        fetchProduceByYearRegionCrop(Number(year), regionId, cropId)
             .then(setData)
             .catch((err) => setError(err.message))
     }
@@ -32,24 +32,19 @@ export function ProductionTable() {
                     <option key={c.crop_id} value={c.crop_id}>{c.name}</option>
                 ))}
             </select>
+            <input
+                type="number"
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
+                placeholder="Indtast årstal"
+            />
             <button onClick={handleFetch}>Hent data</button>
             {error && <p>{error}</p>}
-            <table>
-                <thead>
-                    <tr>
-                        <th>År</th>
-                        <th>Produktion (mio. kg)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.map((row) => (
-                        <tr key={row.year}>
-                            <td>{row.year}</td>
-                            <td>{row.amount ?? "ingen data"}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <div>
+                {data.map((row, i) => (
+                    <p key={i}>{row.region} - {row.crop} - {row.farms}</p>
+                ))}
+            </div>
         </div>
     )
 }

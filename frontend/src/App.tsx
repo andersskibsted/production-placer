@@ -1,13 +1,13 @@
 import './App.css'
 import { CropSelector } from './components/ui/CropSelector'
 import { RegionSelector } from './components/ui/RegionSelector'
-import { ProductionByYear } from './components/ui/ProductionByYear'
-import { ProductionSelector } from './components/ProductionByYearRegionCrop'
-import { ProductionTable } from './components/ProductionTable'
+import { ProduceByYear } from './components/ui/ProduceByYear'
+import { ProduceSelector } from './components/ProduceByYearRegionCrop'
+import { ProduceTable } from './components/ProduceTable'
 import { BackgroundMusic } from './components/audio/BackgroundMusic'
 import { ProductForm } from './components/ui/ProductForm'
-import { ProductionTableRegions } from './components/ProductionTableRegions'
-import { DenmarkMap } from './components/MapProductions'
+import { ProduceTableRegions } from './components/ProduceTableRegions'
+import { DenmarkMap } from './components/MapProduce'
 function App() {
   return (
 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'start', minHeight: '100vh', gap: '40px' }}>
@@ -20,16 +20,16 @@ function App() {
       </div>
     <h2>Test items fra database</h2>
     <div>
-      <ProductionSelector />
+      <ProduceSelector />
     </div>
     <div>
-      <ProductionTable />
+      <ProduceTable />
     </div>
     <div>
       <ProductForm />
     </div>
     <div>
-      <ProductionTableRegions />
+      <ProduceTableRegions />
     </div>
     <div>
       <DenmarkMap data={[

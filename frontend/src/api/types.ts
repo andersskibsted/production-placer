@@ -9,25 +9,25 @@ export interface Crop {
     name: string;
 }
 
-export interface ProductionByYear {
+export interface ProduceByYear {
     region: string;
     crop: string;
-    amount: number | null;
+    farms: number | null;
 }
 
-export interface ProductionByYearRegionCrop {
+export interface ProduceByYearRegionCrop {
   region: string;
   crop: string;
-  amount: number | null;
+  farms: number | null;
 }
 
-export interface ProductionYear {
-  amount: number | null;
+export interface ProduceYear {
+  farms: number | null;
   year: number;
 }
 
-export interface ProductionRegion {
-  amount: number | null;
+export interface ProduceRegion {
+  farms: number | null;
   region: string;
 }
 
