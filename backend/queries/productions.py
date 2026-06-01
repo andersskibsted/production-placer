@@ -6,8 +6,8 @@ GET_PRODUCTION_BY_YEAR = """
         c.name AS crop,
         p.amount
     FROM production p
-    JOIN regions r ON r.id = p.region_id
-    JOIN crops c ON c.id = p.crop_id
+    JOIN regions r ON r.region_id = p.region_id
+    JOIN crops c ON c.crop_id = p.crop_id
     WHERE p.year = %s
     ORDER BY r.name, c.name;
 """
@@ -19,11 +19,11 @@ GET_PRODUCTION_BY_YEAR_REGION_CROP = """
         p.amount,
         p.year
     FROM production p
-    JOIN regions r ON r.id = p.region_id
-    JOIN crops c ON c.id = p.crop_id
+    JOIN regions r ON r.region_id = p.region_id
+    JOIN crops c ON c.crop_id = p.crop_id
     WHERE p.year = %s
-    AND r.id = %s
-    AND c.id = %s
+    AND r.region_id = %s
+    AND c.crop_id = %s
 
 """
 GET_PRODUCTION_BY_REGION_CROP = """
@@ -31,9 +31,19 @@ GET_PRODUCTION_BY_REGION_CROP = """
         p.amount,
         p.year
     FROM production p
-    JOIN regions r ON r.id = p.region_id
-    JOIN crops c ON c.id = p.crop_id
-    WHERE r.id = %s
-    AND c.id = %s
+    JOIN regions r ON r.region_id = p.region_id
+    JOIN crops c ON c.crop_id = p.crop_id
+    WHERE r.region_id = %s
+    AND c.crop_id = %s
     ORDER BY p.year;
+"""
+GET_PRODUCTION_BY_YEAR_CROP = """
+    SELECT
+        p.amount,
+        r.name AS region
+    FROM production p
+    JOIN regions r ON r.region_id = p.region_id
+    JOIN crops c ON c.crop_id = p.crop_id
+    WHERE p.year = %s
+    AND c.crop_id = %s
 """

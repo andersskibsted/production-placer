@@ -1,11 +1,11 @@
 
 export interface Region {
-  id: number;
+  region_id: number;
   name: string;
 }
 
 export interface Crop {
-    id: number;
+    crop_id: number;
     name: string;
 }
 
@@ -24,6 +24,11 @@ export interface ProductionByYearRegionCrop {
 export interface ProductionYear {
   amount: number | null;
   year: number;
+}
+
+export interface ProductionRegion {
+  amount: number | null;
+  region: string;
 }
 
 export interface ApiError {

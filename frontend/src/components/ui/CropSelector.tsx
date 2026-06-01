@@ -6,7 +6,7 @@ export function CropSelector() {
   return (
     <select>
       {crops.map((crop) => (
-        <option key={crop.id} value={crop.id}>
+        <option key={crop.crop_id} value={crop.crop_id}>
           {crop.name}
         </option>
       ))}

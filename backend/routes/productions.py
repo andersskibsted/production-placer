@@ -3,7 +3,7 @@
 from flask import Blueprint, jsonify
 from db import query
 
-from queries.productions import GET_PRODUCTION_BY_REGION_CROP, GET_PRODUCTION_BY_YEAR, GET_PRODUCTION_BY_YEAR_REGION_CROP
+from queries.productions import GET_PRODUCTION_BY_REGION_CROP, GET_PRODUCTION_BY_YEAR, GET_PRODUCTION_BY_YEAR_CROP, GET_PRODUCTION_BY_YEAR_REGION_CROP
 
 bp = Blueprint("productions", __name__, url_prefix="/api/productions")
 
@@ -21,3 +21,8 @@ def production_by_year_region_crop(year, region_id, crop_id):
 def production_by_region_crop(region_id, crop_id):
     year = query(GET_PRODUCTION_BY_REGION_CROP, (region_id, crop_id))
     return jsonify(year)
+
+@bp.route("/year/<int:year>/<int:crop_id>")
+def production_by_year_crop(year, crop_id):
+    region = query(GET_PRODUCTION_BY_YEAR_CROP, (year, crop_id))
+    return jsonify(region)

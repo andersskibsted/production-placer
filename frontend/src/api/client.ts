@@ -7,10 +7,17 @@ export async function request<T>(path: string, options?: RequestInit): Promise<T
   });
 
   if (!response.ok) {
-    throw new Error(`HTTP ${response.status}`);
+    const body = await response.json().catch(() => ({}))
+    throw new Error(body.error ?? `HTTP ${response.status}`)
   }
 
   return response.json() as Promise<T>;
 }
 
 export const get = <T>(path: string) => request<T>(path);
+
+export const post = <T>(path: string, data: unknown) =>
+  request<T>(path, {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
