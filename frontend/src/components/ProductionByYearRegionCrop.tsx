@@ -23,13 +23,13 @@ export function ProductionSelector() {
             <select onChange={(e) => setRegionId(Number(e.target.value))}>
                 <option value="">Vælg region</option>
                 {regions.map((r) => (
-                    <option key={r.id} value={r.id}>{r.name}</option>
+                    <option key={r.region_id} value={r.region_id}>{r.name}</option>
                 ))}
             </select>
             <select onChange={(e) => setCropId(Number(e.target.value))}>
                 <option value="">Vælg afgrøde</option>
                 {crops.map((c) => (
-                    <option key={c.id} value={c.id}>{c.name}</option>
+                    <option key={c.crop_id} value={c.crop_id}>{c.name}</option>
                 ))}
             </select>
             <input

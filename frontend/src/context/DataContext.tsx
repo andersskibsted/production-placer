@@ -15,8 +15,16 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   const [crops, setCrops] = useState<Crop[]>([]);
 
   useEffect(() => {
-    fetchRegions().then(setRegions);
-    fetchCrops().then(setCrops);
+    fetchRegions().then((data) => {
+      console.log("regions:", data)
+      setRegions(data)
+    });
+    fetchCrops().then((data) =>
+      {
+        console.log("crops:", data)
+        setCrops(data)
+
+      });
   }, []);
 
   return (
