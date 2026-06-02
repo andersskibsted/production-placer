@@ -55,6 +55,8 @@ CHECK_AVAILABLE_PRODUCE = """
     FROM produce p
     JOIN regions r ON r.region_id = p.region_id
     JOIN yields y ON p.region_id = y.region_id
+    AND p.crop_id = y.crop_id
+    AND p.year = y.year
     WHERE p.crop_id = %s
     AND y.yield > %s
     AND p.year = %s

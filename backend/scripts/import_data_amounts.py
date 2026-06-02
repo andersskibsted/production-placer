@@ -9,7 +9,7 @@ import os
 load_dotenv()
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-csv_path = os.path.join(BASE_DIR, "..", "data", "produktionsdata_antal.csv")
+csv_path = os.path.join(BASE_DIR, "..", "data", "produktionsdata_antal_regioner.csv")
 
 YEARS_STR = ['2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017',
          '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
@@ -26,9 +26,6 @@ current_region = None
 
 with open(csv_path, "r", encoding="utf-8") as f:
     reader = csv.reader(f, delimiter=",")
-    next(reader) # Spring 4 header-linjer over
-    next(reader) # Spring 4 header-linjer over
-    next(reader) # Spring 4 header-linjer over
     next(reader) # Spring 4 header-linjer over
 
     inserted_crops = set()

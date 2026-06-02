@@ -41,7 +41,7 @@ def regions_available_for_production():
         minimum = r["amount"]
 
         region = query(CHECK_AVAILABLE_PRODUCE, (crop_id_str, minimum, year))
-        # print(region)
+        print(f'in loop {region}')
         regions.append(region)
 
     # result = {
@@ -61,7 +61,7 @@ def regions_available_for_production():
         if len(value) >= number_of_required_crops
     }
     # print(f'number of required: {number_of_required_crops}')
-    # print(f'filtered: {filtered}')
+    print(f'filtered: {filtered}')
 
     regions_with_availble_produce = [{"name": key } for key, r in filtered.items() ]
     print(f'regions with {regions_with_availble_produce}')

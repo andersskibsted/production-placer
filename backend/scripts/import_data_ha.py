@@ -9,7 +9,7 @@ import os
 load_dotenv()
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-csv_path = os.path.join(BASE_DIR, "..", "data", "produktionsdata_hektar.csv")
+csv_path = os.path.join(BASE_DIR, "..", "data", "produktionsdata_hektar_regioner.csv")
 
 YEARS = list(range(2005, 2026))
 
