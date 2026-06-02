@@ -10,7 +10,7 @@ const REGION_IDS: Record<string, string> = {
 };
 
 const DEFAULT_COLOR = "#4ef1a7";
-const HIGHLIGHT_COLOR = "#e14ef1";
+const HIGHLIGHT_COLOR = "#4ef1a7";
 
 export function DenmarkMap() {
   const { highlightedRegions } = useData();
@@ -31,7 +31,7 @@ export function DenmarkMap() {
     Object.entries(REGION_IDS).forEach(([id, name]) => {
       const el = mapRef.current!.querySelector(`#${id}`) as SVGElement;
       if (el) {
-        el.setAttribute("fill", highlightedRegions.includes(name) ? HIGHLIGHT_COLOR : DEFAULT_COLOR);
+        el.setAttribute("fill", highlightedRegions.includes(name) ? HIGHLIGHT_COLOR : "");
       }
     });
   }, [svgContent, highlightedRegions]);

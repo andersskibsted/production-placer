@@ -21,18 +21,18 @@ export function ProduceTable() {
     return (
         <div>
             <select onChange={(e) => setRegionId(Number(e.target.value))}>
-                <option value="">Vælg region</option>
+                <option value="">Select region</option>
                 {regions.map((r) => (
                     <option key={r.region_id} value={r.region_id}>{r.name}</option>
                 ))}
             </select>
             <select onChange={(e) => setCropId(Number(e.target.value))}>
-                <option value="">Vælg afgrøde</option>
+                <option value="">Select crop</option>
                 {crops.map((c) => (
                     <option key={c.crop_id} value={c.crop_id}>{c.name}</option>
                 ))}
             </select>
-            <button onClick={handleFetch}>Hent data</button>
+            <button onClick={handleFetch}>Fetch data</button>
             {error && <p>{error}</p>}
             <table>
                 <thead>

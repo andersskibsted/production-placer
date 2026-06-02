@@ -31,8 +31,17 @@ export function FindProductionPlace() {
     if (selections.some(s => !s.cropId || !s.amount)) return;
 
     // TODO: erstat med rigtigt API kald når backenden er klar
+    fetchRegionsWithRequiredResources(selections)
+      .then(result => {
+          console.log("result:", result);
+          console.log("regions:", result.regions);
+          console.log("er array:", Array.isArray(result.regions));
+        setHighlightedRegions(result.regions.map(r => r.name))
+  })
+      .catch(err => setError(err.message));
+
     // Mock resultat til test:
-    //setHighlightedRegions(["Region Nordjylland", "Region Midtjylland"]);
+    // setHighlightedRegions(["Region Nordjylland", "Region Midtjylland"]);
   }
 
   return (
