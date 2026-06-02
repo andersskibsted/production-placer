@@ -32,8 +32,13 @@ export interface ProduceRegion {
 }
 
 export interface RegionsWithAvailableProduce {
-  regions: strin[];
+  regions: string[];
 }
+
+export interface CropRequirements {
+  requirements: [number, number][]
+}
+
 export interface ApiError {
   error: string;
 }

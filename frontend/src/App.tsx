@@ -9,7 +9,7 @@ import { ProductForm } from './components/ui/ProductForm'
 import { ProduceTableRegions } from './components/ProduceTableRegions'
 import { DenmarkMap } from './components/DenmarkMap'
 import { FindProductionPlace } from './components/FindProductionPlace'
-
+import { RegisterProduction } from './components/RegisterProduction'
 function App() {
   return (
 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'start', minHeight: '100vh', gap: '40px' }}>
@@ -40,6 +40,9 @@ function App() {
     <div>
       <ProductForm />
     </div>
+  <div>
+    <RegisterProduction />
+  </div>
   </div>
   )
 }

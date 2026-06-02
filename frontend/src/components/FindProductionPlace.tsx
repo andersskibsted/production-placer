@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useData } from "../context/DataContext";
-
+import { fetchRegionsWithRequiredResources } from "../api/produce"
 interface CropSelection {
   cropId: number;
   amount: number;
@@ -31,9 +31,9 @@ export function FindProductionPlace() {
     if (selections.some(s => !s.cropId || !s.amount)) return;
 
     // TODO: erstat med rigtigt API kald når backenden er klar
-    // fetchProductionPlaces(selections)
-    //   .then(result => setHighlightedRegions(result.map(r => r.name)))
-    //   .catch(err => setError(err.message));
+    fetchRegionsWithRequiredResources(selections)
+      .then(result => setHighlightedRegions(result.map(r => r.name)))
+      .catch(err => setError(err.message));
 
     // Mock resultat til test:
     setHighlightedRegions(["Region Nordjylland", "Region Midtjylland"]);
