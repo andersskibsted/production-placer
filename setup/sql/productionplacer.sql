@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict 6sdqEyhvpqBjON7KATL40NR2Tb94ok0Zo0IbdEp45PgtdzF9o0C9abPCEGcwCbc
+\restrict tHdhnyDwT9zcQ7pCBOfS0CcRgkaSpJGZ1jcL3SGWrPrFr4pH87ku3SSulb5emQa
 
 -- Dumped from database version 18.4 (Postgres.app)
 -- Dumped by pg_dump version 18.4 (Postgres.app)
@@ -267,6 +267,22 @@ COPY public.average_yield (crop_id, avg_yield) FROM stdin;
 15	7.0
 16	6.5
 17	6.0
+1	7.7
+2	5.6
+3	6.1
+4	4.7
+5	6.5
+6	40.0
+7	65.0
+8	4.0
+9	3.8
+11	25.0
+12	15.0
+13	12.0
+14	7.5
+15	7.0
+16	6.5
+17	6.0
 \.
 
 
@@ -275,23 +291,23 @@ COPY public.average_yield (crop_id, avg_yield) FROM stdin;
 --
 
 COPY public.crops (crop_id, name) FROM stdin;
-1	Hvede
-2	Vårbyg
-3	Rug
-4	Havre
-5	Majs til modenhed
-6	Industrikartofler
-7	Sukkerroer til fabrik
-8	Raps
-9	Ærter til konsum
-10	Frugt og bær
-11	Æbler
-12	Pærer
-13	Jordbær
-14	Kirsebær
-15	Solbær
-16	Ribs
-17	Juletræer og pyntegrønt
+1	Wheat
+2	Spring barley
+3	Rye
+4	Oat
+5	Grain maize
+6	Starch potatoes
+7	Sugar beet
+8	Oilseed rape
+9	Peas for human consumption
+10	Fruits and berries
+11	Apples
+12	Pears
+13	Strawberries
+14	Cherries
+15	Blackcurrants
+16	Redcurrants
+17	Christmas trees and decorative greenery
 \.
 
 
@@ -2292,5 +2308,5 @@ ALTER TABLE ONLY public.production
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 6sdqEyhvpqBjON7KATL40NR2Tb94ok0Zo0IbdEp45PgtdzF9o0C9abPCEGcwCbc
+\unrestrict tHdhnyDwT9zcQ7pCBOfS0CcRgkaSpJGZ1jcL3SGWrPrFr4pH87ku3SSulb5emQa
 
