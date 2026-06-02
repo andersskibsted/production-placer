@@ -21,13 +21,13 @@ export function ProduceSelector() {
     return (
         <div>
             <select onChange={(e) => setRegionId(Number(e.target.value))}>
-                <option value="">Vælg region</option>
+                <option value="">Select region</option>
                 {regions.map((r) => (
                     <option key={r.region_id} value={r.region_id}>{r.name}</option>
                 ))}
             </select>
             <select onChange={(e) => setCropId(Number(e.target.value))}>
-                <option value="">Vælg afgrøde</option>
+                <option value="">Select produce</option>
                 {crops.map((c) => (
                     <option key={c.crop_id} value={c.crop_id}>{c.name}</option>
                 ))}
@@ -36,9 +36,9 @@ export function ProduceSelector() {
                 type="number"
                 value={year}
                 onChange={(e) => setYear(e.target.value)}
-                placeholder="Indtast årstal"
+                placeholder="type in year: eg 2012"
             />
-            <button onClick={handleFetch}>Hent data</button>
+            <button onClick={handleFetch}>Fetch Data</button>
             {error && <p>{error}</p>}
             <div>
                 {data.map((row, i) => (
