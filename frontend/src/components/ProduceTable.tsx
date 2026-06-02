@@ -38,7 +38,7 @@ export function ProduceTable() {
                 <thead>
                     <tr>
                         <th>År</th>
-                        <th>Produktion (mio. kg)</th>
+                        <th>Production (tonne)</th>
                     </tr>
                 </thead>
                 <tbody>

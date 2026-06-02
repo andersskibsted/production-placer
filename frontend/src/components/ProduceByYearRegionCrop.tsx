@@ -11,11 +11,22 @@ export function ProduceSelector() {
     const [data, setData] = useState<ProduceByYear[]>([])
     const [error, setError] = useState<string | null>(null)
 
+    const isValidYear = (value: number): boolean => {
+      const regex = /^20((0[5-9])|(1[0-9])|(2[0-5]))$/; // eksempel: dato-format
+      const str_value = String(value);
+      console.log(str_value);
+      return regex.test(str_value);
+    };
+
     function handleFetch() {
-        if (!regionId || !cropId || !year) return
+      if (!regionId || !cropId || !year) return
+      if (isValidYear(year)) {
         fetchProduceByYearRegionCrop(Number(year), regionId, cropId)
             .then(setData)
-            .catch((err) => setError(err.message))
+          .catch((err) => setError(err.message))
+      } else {
+        setError("Not a valid year. We have data from 2005-2025")
+      }
     }
 
     return (
@@ -35,14 +46,15 @@ export function ProduceSelector() {
             <input
                 type="number"
                 value={year}
-                onChange={(e) => setYear(e.target.value)}
+              onChange={(e) => setYear(e.target.value)
+              }
                 placeholder="type in year: eg 2012"
             />
             <button onClick={handleFetch}>Fetch Data</button>
             {error && <p>{error}</p>}
             <div>
                 {data.map((row, i) => (
-                    <p key={i}>{row.region} - {row.crop} - {row.farms}</p>
+                    <p key={i}>{row.region} - {row.crop} - {row.yield} tonne</p>
                 ))}
             </div>
         </div>
