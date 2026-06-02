@@ -8,6 +8,8 @@ import { BackgroundMusic } from './components/audio/BackgroundMusic'
 import { ProductForm } from './components/ui/ProductForm'
 import { ProduceTableRegions } from './components/ProduceTableRegions'
 import { DenmarkMap } from './components/MapProduce'
+import { VerifyProductionRequirements } from './components/VerifyProductionRequirements'
+import { RegisterProduction } from './components/RegisterProduction'
 function App() {
   return (
 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'start', minHeight: '100vh', gap: '40px' }}>
@@ -32,13 +34,17 @@ function App() {
       <ProduceTableRegions />
     </div>
     <div>
-      <DenmarkMap data={[
-        { name: "Region Nordjylland", amount: 26.5 },
-        { name: "Region Midtjylland", amount: 51.8 },
-        { name: "Region Syddanmark", amount: 58.4 },
-        { name: "Region Sjælland", amount: 27.1 },
-        { name: "Region Hovedstaden", amount: 4.5 },
-      ]} />
+      {/* <DenmarkMap data={[ */}
+      {/*   { name: "Region Nordjylland", amount: 26.5 }, */}
+      {/*   { name: "Region Midtjylland", amount: 51.8 }, */}
+      {/*   { name: "Region Syddanmark", amount: 58.4 }, */}
+      {/*   { name: "Region Sjælland", amount: 27.1 }, */}
+      {/*   { name: "Region Hovedstaden", amount: 4.5 }, */}
+      {/* ]} /> */}
+        <VerifyProductionRequirements />
+    </div>
+    <div>
+      <RegisterProduction />
     </div>
   </div>
   )
