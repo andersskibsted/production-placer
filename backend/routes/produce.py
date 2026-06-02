@@ -36,12 +36,12 @@ def regions_available_for_production():
     regions = []
     year = "2021"
     for r in requirements:
-        print(f'requirement {r}')
+       # print(f'requirement {r}')
         crop_id_str = str(r["cropId"])
         minimum = r["amount"]
 
         region = query(CHECK_AVAILABLE_PRODUCE, (crop_id_str, minimum, year))
-        print(region)
+        # print(region)
         regions.append(region)
 
     # result = {
@@ -54,14 +54,14 @@ def regions_available_for_production():
             result[row["region"]].append((row["region_id"], row["crop"]))
     # for r, r_id, c_id in regions:
     #     result[r].append(c_id)
-    print(result)
+    # print(result)
     filtered = {
         key: value
         for key, value in result.items()
         if len(value) >= number_of_required_crops
     }
-    print(f'number of required: {number_of_required_crops}')
-    print(f'filtered: {filtered}')
+    # print(f'number of required: {number_of_required_crops}')
+    # print(f'filtered: {filtered}')
 
     regions_with_availble_produce = [{"name": key } for key, r in filtered.items() ]
     print(f'regions with {regions_with_availble_produce}')
