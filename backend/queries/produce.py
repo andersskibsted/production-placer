@@ -28,15 +28,18 @@ GET_PRODUCE_BY_YEAR_REGION_CROP = """
 """
 GET_PRODUCE_BY_REGION_CROP = """
     SELECT
-        p.farms,
+        y.yield,
         p.year
     FROM produce p
-    JOIN regions r ON r.region_id = p.region_id
-    JOIN crops c ON c.crop_id = p.crop_id
-    WHERE r.region_id = %s
-    AND c.crop_id = %s
+    -- JOIN regions r ON r.region_id = p.region_id
+    JOIN yields y ON p.crop_id = y.crop_id
+    AND y.region_id = p.region_id
+    AND y.year = p.year
+    WHERE p.region_id = %s
+    AND p.crop_id = %s
     ORDER BY p.year;
 """
+
 GET_PRODUCE_BY_YEAR_CROP = """
     SELECT
         p.farms,

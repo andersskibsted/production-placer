@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict tHdhnyDwT9zcQ7pCBOfS0CcRgkaSpJGZ1jcL3SGWrPrFr4pH87ku3SSulb5emQa
+\restrict 0Hc0ZbyeUN9apWkAb5U1cz7XUvtFoJHKfRXpmORcCegHmpOK5Dhog6ef98nWEHJ
 
 -- Dumped from database version 18.4 (Postgres.app)
 -- Dumped by pg_dump version 18.4 (Postgres.app)
@@ -251,22 +251,6 @@ ALTER TABLE ONLY public.regions ALTER COLUMN region_id SET DEFAULT nextval('publ
 --
 
 COPY public.average_yield (crop_id, avg_yield) FROM stdin;
-1	7.7
-2	5.6
-3	6.1
-4	4.7
-5	6.5
-6	40.0
-7	65.0
-8	4.0
-9	3.8
-11	25.0
-12	15.0
-13	12.0
-14	7.5
-15	7.0
-16	6.5
-17	6.0
 1	7.7
 2	5.6
 3	6.1
@@ -2177,6 +2161,14 @@ SELECT pg_catalog.setval('public.regions_region_id_seq', 170, true);
 
 
 --
+-- Name: average_yield average_yield_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.average_yield
+    ADD CONSTRAINT average_yield_pkey PRIMARY KEY (crop_id);
+
+
+--
 -- Name: crops crops_name_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2308,5 +2300,5 @@ ALTER TABLE ONLY public.production
 -- PostgreSQL database dump complete
 --
 
-\unrestrict tHdhnyDwT9zcQ7pCBOfS0CcRgkaSpJGZ1jcL3SGWrPrFr4pH87ku3SSulb5emQa
+\unrestrict 0Hc0ZbyeUN9apWkAb5U1cz7XUvtFoJHKfRXpmORcCegHmpOK5Dhog6ef98nWEHJ
 

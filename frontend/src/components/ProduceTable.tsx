@@ -45,7 +45,7 @@ export function ProduceTable() {
                     {data.map((row) => (
                         <tr key={row.year}>
                             <td>{row.year}</td>
-                            <td>{row.farms ?? "ingen data"}</td>
+                            <td>{row.yield ?? "ingen data"}</td>
                         </tr>
                     ))}
                 </tbody>

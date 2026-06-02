@@ -22,6 +22,7 @@ def produce_by_year_region_crop(year, region_id, crop_id):
 @bp.route("/<int:region_id>/<int:crop_id>")
 def produce_by_region_crop(region_id, crop_id):
     year = query(GET_PRODUCE_BY_REGION_CROP, (region_id, crop_id))
+    print(year)
     return jsonify(year)
 
 @bp.route("/year/<int:year>/<int:crop_id>")
