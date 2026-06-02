@@ -33,3 +33,18 @@ def query(sql, params=None, fetch="all"):
         else:
             conn.commit()
             return cur.rowcount
+
+def query_tuples(sql, params=None, fetch="all"):
+    conn = get_db()
+    with conn.cursor() as cur:
+        cur.execute(sql, params)
+        if fetch == "all":
+            cols = [desc[0] for desc in cur.description]
+            return [dict(zip(cols, row)) for row in cur.fetchall()]
+        elif fetch == "one":
+            cols = [desc[0] for desc in cur.description]
+            row = cur.fetchone()
+            return dict(zip(cols, row)) if row else None
+        else:
+            conn.commit()
+            return cur.rowcount

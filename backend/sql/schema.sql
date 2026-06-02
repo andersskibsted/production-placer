@@ -17,6 +17,11 @@ CREATE TABLE IF NOT EXISTS produce (
        farms        INTEGER
 );
 
+CREATE TABLE IF NOT EXISTS average_yield (
+       crop_id      INTEGER NOT NULL REFERENCES crops(crop_id),
+       avg_yield    NUMERIC
+);
+
 CREATE TABLE IF NOT EXISTS products (
        product_id SERIAL PRIMARY KEY,
        name TEXT NOT NULL UNIQUE
@@ -33,3 +38,13 @@ CREATE TABLE IF NOT EXISTS product_crops (
        crop_id INTEGER NOT NULL REFERENCES crops(crop_id),
        PRIMARY KEY (product_id, crop_id)
 );
+
+
+CREATE VIEW yields AS
+SELECT
+    p.region_id,
+    p.crop_id,
+    p.year,
+    p.area * av.avg_yield as yield
+FROM produce p
+JOIN average_yield av ON av.crop_id = p.crop_id;

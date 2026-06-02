@@ -31,6 +31,9 @@ export interface ProduceRegion {
   region: string;
 }
 
+export interface RegionsWithAvailableProduce {
+  regions: strin[];
+}
 export interface ApiError {
   error: string;
 }
