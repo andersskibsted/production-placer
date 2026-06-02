@@ -7,7 +7,7 @@ export function VerifyProductionRequirements() {
   const [name, setName] = useState("")
   const [selectedCrops, setSelectedCrops] = useState<number[]>([])
   const [success, setSuccess] = useState(false)
-  const [regions, setRegions] = useState([])
+  const [regions, setRegions] = useState<{name: string}[]>([])
   const [error, setError] = useState<string | null>(null)
 
 
@@ -59,7 +59,7 @@ export function VerifyProductionRequirements() {
           <p>Der er tilgængelige råvarer i:</p>
           <ul>
             {regions.map((region, index) => (
-              <li key={index}>{region}</li>
+              <li key={index}>{region.name}</li>
             ))}
           </ul>
         </div>
