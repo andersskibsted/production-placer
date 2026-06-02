@@ -16,9 +16,12 @@ GET_PRODUCE_BY_YEAR_REGION_CROP = """
     SELECT
         r.name AS region,
         c.name AS crop,
-        p.farms,
+        y.yield,
         p.year
     FROM produce p
+    JOIN yields y ON y.year = p.year
+    AND y.region_id = p.region_id
+    AND y.crop_id = p.crop_id
     JOIN regions r ON r.region_id = p.region_id
     JOIN crops c ON c.crop_id = p.crop_id
     WHERE p.year = %s
