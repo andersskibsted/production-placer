@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
+#from backend.routes import crops
 from db import query
+from collections import defaultdict
 
-from queries.produce import GET_PRODUCE_BY_REGION_CROP, GET_PRODUCE_BY_YEAR, GET_PRODUCE_BY_YEAR_CROP, GET_PRODUCE_BY_YEAR_REGION_CROP
+from queries.produce import CHECK_AVAILABLE_PRODUCE, GET_PRODUCE_BY_REGION_CROP, GET_PRODUCE_BY_YEAR, GET_PRODUCE_BY_YEAR_CROP, GET_PRODUCE_BY_YEAR_REGION_CROP
 
 bp = Blueprint("produce", __name__, url_prefix="/api/produce")
 
@@ -26,3 +28,40 @@ def produce_by_region_crop(region_id, crop_id):
 def produce_by_year_crop(year, crop_id):
     region = query(GET_PRODUCE_BY_YEAR_CROP, (year, crop_id))
     return jsonify(region)
+
+@bp.route("/", methods=["POST"])
+def regions_available_for_production():
+    requirements = request.json["requirements"]
+    number_of_required_crops = len(requirements)
+    minimum = "100"
+    regions = []
+    year = "2021"
+    for r in requirements:
+        # print(r)
+        crop_id_str = str(r)
+        region = query(CHECK_AVAILABLE_PRODUCE, (crop_id_str, minimum, year))
+        # print(region)
+        regions.append(region)
+
+    # result = {
+    #     row["region_id"]: (row["region"], row["crop"])
+    #     for row in regions
+    # }
+    result = defaultdict(list)
+    for region in regions:
+        for row in region:
+            result[row["region"]].append((row["region_id"], row["crop"]))
+    # for r, r_id, c_id in regions:
+    #     result[r].append(c_id)
+    # print(result)
+    filtered = {
+        key: value
+        for key, value in result.items()
+        if len(value) >= number_of_required_crops
+    }
+    # print(f'number of required: {number_of_required_crops}')
+    # print(f'filtered: {filtered}')
+
+    regions_with_availble_produce = [key for key, r in filtered.items() ]
+    # print(f'regions with {regions_with_availble_produce}')
+    return jsonify({ "regions": regions_with_availble_produce })

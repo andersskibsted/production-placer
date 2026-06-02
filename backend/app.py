@@ -2,14 +2,11 @@
 
 from flask import Flask
 from db import init_pool, close_db
-from routes import crops, regions, produce, products
+from routes import crops, regions, produce, products, productions
 from flask_cors import CORS
 from config import Config
 
 app = Flask(__name__)
-
-# CORS(app, origins=["http://localhost:5173"])
-#CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=False)
 
 app.config.from_object(Config)
 
@@ -22,6 +19,7 @@ app.register_blueprint(crops.bp)
 app.register_blueprint(regions.bp)
 app.register_blueprint(produce.bp)
 app.register_blueprint(products.bp)
+app.register_blueprint(productions.bp)
 
 @app.after_request
 def add_cors_headers(response):

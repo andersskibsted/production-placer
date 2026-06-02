@@ -47,3 +47,14 @@ GET_PRODUCE_BY_YEAR_CROP = """
     WHERE p.year = %s
     AND c.crop_id = %s
 """
+CHECK_AVAILABLE_PRODUCE = """
+    SELECT
+        r.name AS region,
+        r.region_id AS region_id,
+        p.crop_id AS crop
+    FROM produce p
+    JOIN regions r ON r.region_id = p.region_id
+    WHERE p.crop_id = %s
+    AND p.area > %s
+    AND year = %s
+"""

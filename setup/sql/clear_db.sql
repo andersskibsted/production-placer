@@ -4,6 +4,8 @@ DROP TABLE IF EXISTS produce CASCADE;
 DROP TABLE IF EXISTS products CASCADE;
 DROP TABLE IF EXISTS production CASCADE;
 DROP TABLE IF EXISTS product_crops CASCADE;
+DROP TABLE IF EXISTS average_yield CASCADE;
+DROP VIEW IF EXISTS yields;
 
 
 CREATE TABLE IF NOT EXISTS regions (
@@ -22,7 +24,12 @@ CREATE TABLE IF NOT EXISTS produce (
        crop_id      INTEGER NOT NULL REFERENCES crops(crop_id),
        year         INTEGER NOT NULL,
        area         INTEGER,
-       farms        INTEGER
+       farms        INTEGER,
+);
+
+CREATE TABLE IF NOT EXISTS average_yield (
+       crop_id      INTEGER NOT NULL REFERENCES crops(crop_id),
+       avg_yield    NUMERIC
 );
 
 CREATE TABLE IF NOT EXISTS products (
@@ -41,3 +48,12 @@ CREATE TABLE IF NOT EXISTS product_crops (
        crop_id INTEGER NOT NULL REFERENCES crops(crop_id),
        PRIMARY KEY (product_id, crop_id)
 );
+
+CREATE VIEW yields AS
+SELECT
+    p.region_id,
+    p.crop_id,
+    p.year,
+    p.area * av.avg_yield as yield
+FROM produce p
+JOIN average_yield av ON av.crop_id = p.crop_id;
