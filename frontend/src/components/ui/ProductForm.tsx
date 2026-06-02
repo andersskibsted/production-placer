@@ -25,16 +25,17 @@ export function ProductForm() {
   }
 
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+      <h2>Add your production to the database</h2>
       <input
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        placeholder="Produktnavn"
+        placeholder="Production name"
       />
-        <div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
           {crops.map((c) => (
-            <label key={c.crop_id}>
+            <label key={c.crop_id} style={{ width: "200px", display: "flex", alignItems: "center", gap: "6px" }}>
               <input
                 type="checkbox"
                 checked={selectedCrops.includes(c.crop_id)}
@@ -45,8 +46,8 @@ export function ProductForm() {
           ))}
         </div>
 
-      <button onClick={handleSubmit}>Gem produkt</button>
-      {success && <p>Produkt gemt!</p>}
+      <button onClick={handleSubmit}>Save production</button>
+      {success && <p>Production saved!</p>}
       {error && <p>{error}</p>}
     </div>
   )

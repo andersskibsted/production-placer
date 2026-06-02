@@ -6,13 +6,21 @@ import type { Region, Crop } from "../api/types";
 interface DataContextType {
   regions: Region[];
   crops: Crop[];
+  highlightedRegions: string[];
+  setHighlightedRegions: (regions: string[]) => void;
 }
 
-const DataContext = createContext<DataContextType>({ regions: [], crops: [] });
+const DataContext = createContext<DataContextType>({ 
+                                                  regions: [], 
+                                                  crops: [],
+                                                  highlightedRegions: [],
+                                                  setHighlightedRegions: () => {}
+                                                });
 
 export function DataProvider({ children }: { children: React.ReactNode }) {
   const [regions, setRegions] = useState<Region[]>([]);
   const [crops, setCrops] = useState<Crop[]>([]);
+  const [highlightedRegions, setHighlightedRegions] = useState<string[]>([]);
 
   useEffect(() => {
     fetchRegions().then((data) => {
@@ -28,7 +36,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <DataContext.Provider value={{ regions, crops }}>
+    <DataContext.Provider value={{ regions, crops, highlightedRegions, setHighlightedRegions }}>
       {children}
     </DataContext.Provider>
   );

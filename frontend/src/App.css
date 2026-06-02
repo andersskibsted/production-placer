@@ -1,3 +1,44 @@
+body {
+  background-color: #2c5a85;
+  padding-top: 40px;
+  padding-bottom: 100px;
+}
+h1, h2, h3 {
+  color: #1ebb23;
+}
+
+p {
+  color: #ffffff;
+}
+select {
+  padding: 4px 8px;
+  font-size: 16px;
+  border-radius: 4px;
+}
+button {
+  padding: 4px 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  background-color: #bbaf0f;
+  color: #000000;
+}
+
+input {
+  padding: 4px 8px;
+  font-size: 16px;
+  border-radius: 4px;
+}
+.input-row {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+.section{
+  background-color: #0c3d72b4;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
 .counter {
   font-size: 16px;
   padding: 5px 10px;
