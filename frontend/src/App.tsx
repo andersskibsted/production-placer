@@ -44,10 +44,10 @@ function App() {
       <DenmarkMap data={[
       ]} />
     </div>
-    <div className="section">
-      <ProductForm />
-    </div>
-  <div>
+    {/* <div className="section"> */}
+      {/* <ProductForm /> */}
+    {/* </div> */}
+  <div className="section">
     <RegisterProduction />
   </div>
   </div>

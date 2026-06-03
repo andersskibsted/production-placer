@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict 0Hc0ZbyeUN9apWkAb5U1cz7XUvtFoJHKfRXpmORcCegHmpOK5Dhog6ef98nWEHJ
+\restrict yEnqcTmWNryE7GmWxZinzfpJ6JKakW4mX3c1athXWva68KANlIvIuydg77gKhwn
 
 -- Dumped from database version 18.4 (Postgres.app)
 -- Dumped by pg_dump version 18.4 (Postgres.app)
@@ -98,23 +98,23 @@ ALTER SEQUENCE public.produce_id_seq OWNED BY public.produce.id;
 
 
 --
--- Name: product_crops; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.product_crops (
-    product_id integer NOT NULL,
-    crop_id integer NOT NULL
-);
-
-
---
 -- Name: production; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.production (
     production_id integer NOT NULL,
     region_id integer NOT NULL,
-    product_id integer NOT NULL
+    name text NOT NULL
+);
+
+
+--
+-- Name: production_crops; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.production_crops (
+    production_id integer NOT NULL,
+    crop_id integer NOT NULL
 );
 
 
@@ -136,36 +136,6 @@ CREATE SEQUENCE public.production_production_id_seq
 --
 
 ALTER SEQUENCE public.production_production_id_seq OWNED BY public.production.production_id;
-
-
---
--- Name: products; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.products (
-    product_id integer NOT NULL,
-    name text NOT NULL
-);
-
-
---
--- Name: products_product_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.products_product_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: products_product_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.products_product_id_seq OWNED BY public.products.product_id;
 
 
 --
@@ -230,13 +200,6 @@ ALTER TABLE ONLY public.produce ALTER COLUMN id SET DEFAULT nextval('public.prod
 --
 
 ALTER TABLE ONLY public.production ALTER COLUMN production_id SET DEFAULT nextval('public.production_production_id_seq'::regclass);
-
-
---
--- Name: products product_id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.products ALTER COLUMN product_id SET DEFAULT nextval('public.products_product_id_seq'::regclass);
 
 
 --
@@ -2089,26 +2052,18 @@ COPY public.produce (id, region_id, crop_id, year, area, farms) FROM stdin;
 
 
 --
--- Data for Name: product_crops; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public.product_crops (product_id, crop_id) FROM stdin;
-\.
-
-
---
 -- Data for Name: production; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.production (production_id, region_id, product_id) FROM stdin;
+COPY public.production (production_id, region_id, name) FROM stdin;
 \.
 
 
 --
--- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: production_crops; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.products (product_id, name) FROM stdin;
+COPY public.production_crops (production_id, crop_id) FROM stdin;
 \.
 
 
@@ -2144,13 +2099,6 @@ SELECT pg_catalog.setval('public.produce_id_seq', 1785, true);
 --
 
 SELECT pg_catalog.setval('public.production_production_id_seq', 1, false);
-
-
---
--- Name: products_product_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('public.products_product_id_seq', 1, false);
 
 
 --
@@ -2193,11 +2141,11 @@ ALTER TABLE ONLY public.produce
 
 
 --
--- Name: product_crops product_crops_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: production_crops production_crops_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.product_crops
-    ADD CONSTRAINT product_crops_pkey PRIMARY KEY (product_id, crop_id);
+ALTER TABLE ONLY public.production_crops
+    ADD CONSTRAINT production_crops_pkey PRIMARY KEY (production_id, crop_id);
 
 
 --
@@ -2206,22 +2154,6 @@ ALTER TABLE ONLY public.product_crops
 
 ALTER TABLE ONLY public.production
     ADD CONSTRAINT production_pkey PRIMARY KEY (production_id);
-
-
---
--- Name: products products_name_key; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.products
-    ADD CONSTRAINT products_name_key UNIQUE (name);
-
-
---
--- Name: products products_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.products
-    ADD CONSTRAINT products_pkey PRIMARY KEY (product_id);
 
 
 --
@@ -2265,27 +2197,19 @@ ALTER TABLE ONLY public.produce
 
 
 --
--- Name: product_crops product_crops_crop_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: production_crops production_crops_crop_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.product_crops
-    ADD CONSTRAINT product_crops_crop_id_fkey FOREIGN KEY (crop_id) REFERENCES public.crops(crop_id);
-
-
---
--- Name: product_crops product_crops_product_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.product_crops
-    ADD CONSTRAINT product_crops_product_id_fkey FOREIGN KEY (product_id) REFERENCES public.products(product_id);
+ALTER TABLE ONLY public.production_crops
+    ADD CONSTRAINT production_crops_crop_id_fkey FOREIGN KEY (crop_id) REFERENCES public.crops(crop_id);
 
 
 --
--- Name: production production_product_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: production_crops production_crops_production_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.production
-    ADD CONSTRAINT production_product_id_fkey FOREIGN KEY (product_id) REFERENCES public.products(product_id);
+ALTER TABLE ONLY public.production_crops
+    ADD CONSTRAINT production_crops_production_id_fkey FOREIGN KEY (production_id) REFERENCES public.production(production_id);
 
 
 --
@@ -2300,5 +2224,5 @@ ALTER TABLE ONLY public.production
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 0Hc0ZbyeUN9apWkAb5U1cz7XUvtFoJHKfRXpmORcCegHmpOK5Dhog6ef98nWEHJ
+\unrestrict yEnqcTmWNryE7GmWxZinzfpJ6JKakW4mX3c1athXWva68KANlIvIuydg77gKhwn
 
