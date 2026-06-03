@@ -1,9 +1,10 @@
 import { get, post } from "./client"
 
-export function registerProduction(regionId: number, productName: string):
+export function registerProduction(regionId: number, cropId: number[], productName: string ):
 Promise<{ production_id: number }> {
   return post<{ production_id }>("/api/productions/", {
     region_id: regionId,
+    crop_ids: cropId,
     product_name: productName
   })
 }
