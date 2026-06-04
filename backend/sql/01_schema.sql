@@ -18,27 +18,22 @@ CREATE TABLE IF NOT EXISTS produce (
 );
 
 CREATE TABLE IF NOT EXISTS average_yield (
-       crop_id      INTEGER NOT NULL REFERENCES crops(crop_id),
+       crop_id      INTEGER PRIMARY KEY REFERENCES crops(crop_id),
        avg_yield    NUMERIC
 );
 
-CREATE TABLE IF NOT EXISTS products (
-       product_id SERIAL PRIMARY KEY,
-       name TEXT NOT NULL UNIQUE
-);
 
 CREATE TABLE IF NOT EXISTS production (
        production_id SERIAL PRIMARY KEY,
        region_id INTEGER NOT NULL REFERENCES regions(region_id),
-       product_id INTEGER NOT NULL REFERENCES products(product_id)
+       name TEXT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS product_crops (
-       product_id INTEGER NOT NULL REFERENCES products(product_id),
+CREATE TABLE IF NOT EXISTS production_crops (
+       production_id INTEGER NOT NULL REFERENCES production(production_id),
        crop_id INTEGER NOT NULL REFERENCES crops(crop_id),
-       PRIMARY KEY (product_id, crop_id)
+       PRIMARY KEY (production_id, crop_id)
 );
-
 
 CREATE VIEW yields AS
 SELECT
