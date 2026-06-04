@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useData } from "../context/DataContext"
-import { registerProduction } from "../api/productions"
+import { registerProduction} from "../api/productions"
 
 export function RegisterProduction() {
   const { regions, crops } = useData()
@@ -11,6 +11,7 @@ export function RegisterProduction() {
   const [error, setError] = useState<string | null>(null)
   const [submittedName, setSubmittedName] = useState('')
   const [submittedRegion, setSubmittedRegion] = useState('')
+  const { loadProductions } = useData()
 
   const isValidProductionName = (pname: string): boolean => {
     const regex = /^[A-Z]([a-z,A-Z]+\s?)*[0-9]*$/; // Requires capital starting letter followed by 0 or more letters with an optional whitespace. Lastly the name can be finised with a number.
@@ -39,7 +40,7 @@ export function RegisterProduction() {
     setSubmittedRegion(selectedRegion);
 
     registerProduction(selectedRegion[0], selectedCrops, name)
-      .then(() => setSuccess(true))
+      .then(() => {setSuccess(true); loadProductions();})
       .catch((err) => setError(err.message))
     } else {
       setError("Not a valid production name. Must start with a capital letter, not special symbols allowed and numbers are only allowed at the end.")

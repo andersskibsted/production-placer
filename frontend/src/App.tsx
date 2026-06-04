@@ -10,6 +10,8 @@ import { ProduceTableRegions } from './components/ProduceTableRegions'
 import { DenmarkMap } from './components/DenmarkMap'
 import { FindProductionPlace } from './components/FindProductionPlace'
 import { RegisterProduction } from './components/RegisterProduction'
+import { ShowProduction } from './components/ShowProductions'
+import { DeleteProduction } from './components/DeleteProduction'
 function App() {
   return (
 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'start', minHeight: '100vh', gap: '40px' , color: 'white'}}>
@@ -47,6 +49,12 @@ function App() {
     {/* </div> */}
     <div className="section">
       <RegisterProduction />
+    </div>
+    <div className="section">
+      <ShowProduction />
+    </div>
+    <div className="section">
+      <DeleteProduction />
     </div>
   </div>
   )

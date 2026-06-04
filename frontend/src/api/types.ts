@@ -39,6 +39,13 @@ export interface CropRequirements {
   requirements: [number, number][]
 }
 
+export interface Productions {
+  id: number;
+  name: string;
+  region: string;
+  crop: string;
+}
+
 export interface ApiError {
   error: string;
 }
