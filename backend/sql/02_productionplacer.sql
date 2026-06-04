@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict yEnqcTmWNryE7GmWxZinzfpJ6JKakW4mX3c1athXWva68KANlIvIuydg77gKhwn
+\restrict PgtngJ083IWjRsWP2wP12LRbN6ZTbRFEONKpi6VDXHrg2QlS6PI1l5V9xO2pgDb
 
 -- Dumped from database version 18.4 (Postgres.app)
 -- Dumped by pg_dump version 18.4 (Postgres.app)
@@ -19,194 +19,29 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-SET default_tablespace = '';
-
-SET default_table_access_method = heap;
-
 --
--- Name: average_yield; Type: TABLE; Schema: public; Owner: -
+-- Data for Name: crops; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-CREATE TABLE public.average_yield (
-    crop_id integer NOT NULL,
-    avg_yield numeric
-);
-
-
---
--- Name: crops; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.crops (
-    crop_id integer NOT NULL,
-    name text NOT NULL
-);
-
-
---
--- Name: crops_crop_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.crops_crop_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: crops_crop_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.crops_crop_id_seq OWNED BY public.crops.crop_id;
-
-
---
--- Name: produce; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.produce (
-    id integer NOT NULL,
-    region_id integer NOT NULL,
-    crop_id integer NOT NULL,
-    year integer NOT NULL,
-    area integer,
-    farms integer
-);
-
-
---
--- Name: produce_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.produce_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: produce_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.produce_id_seq OWNED BY public.produce.id;
-
-
---
--- Name: production; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.production (
-    production_id integer NOT NULL,
-    region_id integer NOT NULL,
-    name text NOT NULL
-);
-
-
---
--- Name: production_crops; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.production_crops (
-    production_id integer NOT NULL,
-    crop_id integer NOT NULL
-);
-
-
---
--- Name: production_production_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.production_production_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: production_production_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.production_production_id_seq OWNED BY public.production.production_id;
-
-
---
--- Name: regions; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.regions (
-    region_id integer NOT NULL,
-    name text NOT NULL
-);
-
-
---
--- Name: regions_region_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.regions_region_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: regions_region_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.regions_region_id_seq OWNED BY public.regions.region_id;
-
-
---
--- Name: yields; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW public.yields AS
- SELECT p.region_id,
-    p.crop_id,
-    p.year,
-    ((p.area)::numeric * av.avg_yield) AS yield
-   FROM (public.produce p
-     JOIN public.average_yield av ON ((av.crop_id = p.crop_id)));
-
-
---
--- Name: crops crop_id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.crops ALTER COLUMN crop_id SET DEFAULT nextval('public.crops_crop_id_seq'::regclass);
-
-
---
--- Name: produce id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.produce ALTER COLUMN id SET DEFAULT nextval('public.produce_id_seq'::regclass);
-
-
---
--- Name: production production_id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.production ALTER COLUMN production_id SET DEFAULT nextval('public.production_production_id_seq'::regclass);
-
-
---
--- Name: regions region_id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.regions ALTER COLUMN region_id SET DEFAULT nextval('public.regions_region_id_seq'::regclass);
+COPY public.crops (crop_id, name) FROM stdin;
+1	Wheat
+2	Spring barley
+3	Rye
+4	Oat
+5	Grain maize
+6	Starch potatoes
+7	Sugar beet
+8	Oilseed rape
+9	Peas for human consumption
+10	Fruits and berries
+11	Apples
+12	Pears
+13	Strawberries
+14	Cherries
+15	Blackcurrants
+16	Redcurrants
+17	Christmas trees and decorative greenery
+\.
 
 
 --
@@ -234,27 +69,15 @@ COPY public.average_yield (crop_id, avg_yield) FROM stdin;
 
 
 --
--- Data for Name: crops; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: regions; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.crops (crop_id, name) FROM stdin;
-1	Wheat
-2	Spring barley
-3	Rye
-4	Oat
-5	Grain maize
-6	Starch potatoes
-7	Sugar beet
-8	Oilseed rape
-9	Peas for human consumption
-10	Fruits and berries
-11	Apples
-12	Pears
-13	Strawberries
-14	Cherries
-15	Blackcurrants
-16	Redcurrants
-17	Christmas trees and decorative greenery
+COPY public.regions (region_id, name) FROM stdin;
+1	Region Hovedstaden
+18	Region Sjælland
+35	Region Syddanmark
+52	Region Midtjylland
+69	Region Nordjylland
 \.
 
 
@@ -2068,19 +1891,6 @@ COPY public.production_crops (production_id, crop_id) FROM stdin;
 
 
 --
--- Data for Name: regions; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public.regions (region_id, name) FROM stdin;
-1	Region Hovedstaden
-18	Region Sjælland
-35	Region Syddanmark
-52	Region Midtjylland
-69	Region Nordjylland
-\.
-
-
---
 -- Name: crops_crop_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -2098,7 +1908,7 @@ SELECT pg_catalog.setval('public.produce_id_seq', 1785, true);
 -- Name: production_production_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.production_production_id_seq', 1, false);
+SELECT pg_catalog.setval('public.production_production_id_seq', 4, true);
 
 
 --
@@ -2109,120 +1919,8 @@ SELECT pg_catalog.setval('public.regions_region_id_seq', 170, true);
 
 
 --
--- Name: average_yield average_yield_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.average_yield
-    ADD CONSTRAINT average_yield_pkey PRIMARY KEY (crop_id);
-
-
---
--- Name: crops crops_name_key; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.crops
-    ADD CONSTRAINT crops_name_key UNIQUE (name);
-
-
---
--- Name: crops crops_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.crops
-    ADD CONSTRAINT crops_pkey PRIMARY KEY (crop_id);
-
-
---
--- Name: produce produce_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.produce
-    ADD CONSTRAINT produce_pkey PRIMARY KEY (id);
-
-
---
--- Name: production_crops production_crops_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.production_crops
-    ADD CONSTRAINT production_crops_pkey PRIMARY KEY (production_id, crop_id);
-
-
---
--- Name: production production_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.production
-    ADD CONSTRAINT production_pkey PRIMARY KEY (production_id);
-
-
---
--- Name: regions regions_name_key; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.regions
-    ADD CONSTRAINT regions_name_key UNIQUE (name);
-
-
---
--- Name: regions regions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.regions
-    ADD CONSTRAINT regions_pkey PRIMARY KEY (region_id);
-
-
---
--- Name: average_yield average_yield_crop_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.average_yield
-    ADD CONSTRAINT average_yield_crop_id_fkey FOREIGN KEY (crop_id) REFERENCES public.crops(crop_id);
-
-
---
--- Name: produce produce_crop_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.produce
-    ADD CONSTRAINT produce_crop_id_fkey FOREIGN KEY (crop_id) REFERENCES public.crops(crop_id);
-
-
---
--- Name: produce produce_region_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.produce
-    ADD CONSTRAINT produce_region_id_fkey FOREIGN KEY (region_id) REFERENCES public.regions(region_id);
-
-
---
--- Name: production_crops production_crops_crop_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.production_crops
-    ADD CONSTRAINT production_crops_crop_id_fkey FOREIGN KEY (crop_id) REFERENCES public.crops(crop_id);
-
-
---
--- Name: production_crops production_crops_production_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.production_crops
-    ADD CONSTRAINT production_crops_production_id_fkey FOREIGN KEY (production_id) REFERENCES public.production(production_id);
-
-
---
--- Name: production production_region_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.production
-    ADD CONSTRAINT production_region_id_fkey FOREIGN KEY (region_id) REFERENCES public.regions(region_id);
-
-
---
 -- PostgreSQL database dump complete
 --
 
-\unrestrict yEnqcTmWNryE7GmWxZinzfpJ6JKakW4mX3c1athXWva68KANlIvIuydg77gKhwn
+\unrestrict PgtngJ083IWjRsWP2wP12LRbN6ZTbRFEONKpi6VDXHrg2QlS6PI1l5V9xO2pgDb
 
