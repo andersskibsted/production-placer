@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS average_yield (
 CREATE TABLE IF NOT EXISTS production (
        production_id SERIAL PRIMARY KEY,
        region_id INTEGER NOT NULL REFERENCES regions(region_id),
-       name TEXT NOT NULL
+       name TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS production_crops (

@@ -7,7 +7,9 @@ DB_USER=$(whoami)
 # Genstart database
 dropdb productionplacer 2>/dev/null
 createdb productionplacer
-psql -U $DB_USER -d productionplacer -f setup/sql/productionplacer.sql
+psql -U "$DB_USER" -d productionplacer -f backend/sql/01_schema.sql
+psql -U "$DB_USER" -d productionplacer -f backend/sql/02_productionplacer.sql
+#psql -U $DB_USER -d productionplacer -f setup/sql/productionplacer.sql
 
 # Start backend i baggrunden
 echo "🚀 Starter backend..."
