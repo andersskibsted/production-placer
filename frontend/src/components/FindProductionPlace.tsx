@@ -44,8 +44,6 @@ export function FindProductionPlace() {
   })
       .catch(err => setError(err.message));
 
-    // Mock resultat til test:
-    // setHighlightedRegions(["Region Nordjylland", "Region Midtjylland"]);
   }
 
   return (
@@ -86,9 +84,16 @@ export function FindProductionPlace() {
                     </tr>
                 </thead>
                 <tbody>
-                    {regions.map((row) => (
-                        <tr key={row.name}>
-                            <td>{row.name}</td>
+                    {regions.map((region) => (
+                        <tr key={region.name}>
+                          <strong>{region.name}: </strong>
+                          <div>
+                            {region.crops.map((c) => (
+                                <div key={c.crop}>
+                                  {c.crop}: {Number(c.yield)} tonnes
+                                </div>
+                            ))}
+                            </div>
                         </tr>
                     ))}
                 </tbody>
