@@ -10,7 +10,7 @@ bp = Blueprint("productions", __name__, url_prefix="/api/productions")
 @bp.route("/", methods=["POST"])
 def register_production():
     data = request.get_json()
-    product_name = data["product_name"].lower()
+    product_name = data["product_name"]
     region_id = data["region_id"]
     crop_ids = data["crop_ids"]
     conn = get_db()
