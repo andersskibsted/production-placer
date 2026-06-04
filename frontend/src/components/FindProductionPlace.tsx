@@ -11,6 +11,7 @@ export function FindProductionPlace() {
   const [selections, setSelections] = useState<CropSelection[]>([
     { cropId: 0, amount: 0 }
   ]);
+  const [regions, setRegions] = useState<{ name: string }[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   function addCrop() {
@@ -36,12 +37,13 @@ export function FindProductionPlace() {
           console.log("result:", result);
           console.log("regions:", result.regions);
           console.log("er array:", Array.isArray(result.regions));
+        setRegions(result.regions);
+        console.log(result.regions[0]);
         setHighlightedRegions(result.regions.map(r => r.name))
+        
   })
       .catch(err => setError(err.message));
 
-    // Mock resultat til test:
-    // setHighlightedRegions(["Region Nordjylland", "Region Midtjylland"]);
   }
 
   return (
@@ -67,14 +69,35 @@ export function FindProductionPlace() {
             placeholder="Amount (tonnes)"
           />
           {selections.length > 1 && (
-            <button onClick={() => removeCrop(i)}>Fjern</button>
+            <button onClick={() => removeCrop(i)}>Remove</button>
           )}
         </div>
       ))}
 
       <button onClick={addCrop}>+ Add crop</button>
       <button onClick={handleSearch}>Find regions</button>
-
+            
+            <table style={{ margin: '0 auto' }}>
+                <thead>
+                    <tr>
+                        <th>Suitable region(s)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {regions.map((region) => (
+                        <tr key={region.name}>
+                          <strong>{region.name}: </strong>
+                          <div>
+                            {region.crops.map((c) => (
+                                <div key={c.crop}>
+                                  {c.crop}: {Number(c.yield)} tonnes
+                                </div>
+                            ))}
+                            </div>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
       {error && <p>{error}</p>}
     </div>
   );

@@ -31,6 +31,7 @@ export function ProduceSelector() {
 
     return (
         <div>
+        <h3>You can browse the produce yield for a region in a given year by filling in the blanks below.</h3>
             <select onChange={(e) => setRegionId(Number(e.target.value))}>
                 <option value="">Select region</option>
                 {regions.map((r) => (
@@ -54,7 +55,7 @@ export function ProduceSelector() {
             {error && <p>{error}</p>}
             <div>
                 {data.map((row, i) => (
-                    <p key={i}>{row.region} - {row.crop} - {row.yield} tonne</p>
+                    <p key={i}>{row.region} - {row.crop} - {row.yield} tonnes</p>
                 ))}
             </div>
         </div>

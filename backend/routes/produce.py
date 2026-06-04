@@ -35,35 +35,40 @@ def regions_available_for_production():
     requirements = request.json["requirements"]
     number_of_required_crops = len(requirements)
     regions = []
-    year = "2021"
+    year = "2024"
     for r in requirements:
-       # print(f'requirement {r}')
         crop_id_str = str(r["cropId"])
         minimum = r["amount"]
 
         region = query(CHECK_AVAILABLE_PRODUCE, (crop_id_str, minimum, year))
-        print(f'in loop {region}')
         regions.append(region)
 
-    # result = {
-    #     row["region_id"]: (row["region"], row["crop"])
-    #     for row in regions
-    # }
     result = defaultdict(list)
     for region in regions:
         for row in region:
-            result[row["region"]].append((row["region_id"], row["crop"]))
-    # for r, r_id, c_id in regions:
-    #     result[r].append(c_id)
-    # print(result)
+            result[row["region"]].append({
+                "region_id": row["region_id"],
+                "crop": row["crop"],
+                "yield": row["yield"]
+            })
+
     filtered = {
         key: value
         for key, value in result.items()
         if len(value) >= number_of_required_crops
     }
-    # print(f'number of required: {number_of_required_crops}')
-    print(f'filtered: {filtered}')
 
-    regions_with_availble_produce = [{"name": key } for key, r in filtered.items() ]
-    print(f'regions with {regions_with_availble_produce}')
+    regions_with_availble_produce = [
+        {
+            "name": key,
+            "crops": [
+                {
+                    "crop": item["crop"],
+                    "yield": item["yield"]
+                }
+                for item in value
+            ]
+        }
+        for key, value in filtered.items()
+    ]
     return jsonify({ "regions": regions_with_availble_produce })
