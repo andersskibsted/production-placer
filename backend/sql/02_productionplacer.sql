@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict PgtngJ083IWjRsWP2wP12LRbN6ZTbRFEONKpi6VDXHrg2QlS6PI1l5V9xO2pgDb
+\restrict UfJemkKB3smFc7RetlpwCdSKbYxsoU8c1P9FBsPXt8FBu2iXbo1jAslmbYqqqrb
 
 -- Dumped from database version 18.4 (Postgres.app)
 -- Dumped by pg_dump version 18.4 (Postgres.app)
@@ -1879,6 +1879,8 @@ COPY public.produce (id, region_id, crop_id, year, area, farms) FROM stdin;
 --
 
 COPY public.production (production_id, region_id, name) FROM stdin;
+8	1	Saft
+15	1	Kartoffelchips
 \.
 
 
@@ -1887,6 +1889,9 @@ COPY public.production (production_id, region_id, name) FROM stdin;
 --
 
 COPY public.production_crops (production_id, crop_id) FROM stdin;
+8	15
+8	16
+15	6
 \.
 
 
@@ -1908,7 +1913,7 @@ SELECT pg_catalog.setval('public.produce_id_seq', 1785, true);
 -- Name: production_production_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.production_production_id_seq', 4, true);
+SELECT pg_catalog.setval('public.production_production_id_seq', 16, true);
 
 
 --
@@ -1922,5 +1927,5 @@ SELECT pg_catalog.setval('public.regions_region_id_seq', 170, true);
 -- PostgreSQL database dump complete
 --
 
-\unrestrict PgtngJ083IWjRsWP2wP12LRbN6ZTbRFEONKpi6VDXHrg2QlS6PI1l5V9xO2pgDb
+\unrestrict UfJemkKB3smFc7RetlpwCdSKbYxsoU8c1P9FBsPXt8FBu2iXbo1jAslmbYqqqrb
 

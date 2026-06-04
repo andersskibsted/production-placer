@@ -38,7 +38,7 @@ export function ProduceTable() {
             <table style={{ margin: '0 auto' }}>
                 <thead>
                     <tr>
-                        <th>År</th>
+                        <th>Year</th>
                         <th>Production (tonnes)</th>
                     </tr>
                 </thead>

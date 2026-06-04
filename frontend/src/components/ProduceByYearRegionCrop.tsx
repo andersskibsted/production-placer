@@ -12,7 +12,7 @@ export function ProduceSelector() {
     const [error, setError] = useState<string | null>(null)
 
     const isValidYear = (value: number): boolean => {
-      const regex = /^20((0[5-9])|(1[0-9])|(2[0-5]))$/; // eksempel: dato-format
+      const regex = /^20((0[5-9])|(1[0-9])|(2[0-5]))$/;
       const str_value = String(value);
       console.log(str_value);
       return regex.test(str_value);

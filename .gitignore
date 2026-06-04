@@ -24,7 +24,7 @@ frontend/.vite/
 frontend/**/.cache/
 
 # Lokale env filer
-frontend/.env
+#frontend/.env
 frontend/.env.local
 frontend/.env.*.local
 
@@ -48,4 +48,4 @@ build
 htmlcov
 
 test_code/
-.env
+#.env

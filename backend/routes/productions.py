@@ -2,15 +2,14 @@
 
 from flask import Blueprint, jsonify, request
 from db import query, get_db
-#from queries.products import GET_PRODUCT_ID
-from queries.productions import INSERT_PRODUCTION, INSERT_PRODUCTION_CROP
+from queries.productions import INSERT_PRODUCTION, INSERT_PRODUCTION_CROP, GET_ALL_PRODUCTIONS_WITH_CROPS, DELETE_PRODUCTION_CROPS, DELETE_PRODUCTION
 
 bp = Blueprint("productions", __name__, url_prefix="/api/productions")
 
 @bp.route("/", methods=["POST"])
 def register_production():
     data = request.get_json()
-    product_name = data["product_name"].lower()
+    product_name = data["product_name"]
     region_id = data["region_id"]
     crop_ids = data["crop_ids"]
     conn = get_db()
@@ -30,3 +29,14 @@ def register_production():
         return jsonify({ "error": return_err }), 409
 
     return jsonify({"production_id": production_id})
+
+@bp.route("/")
+def get_productions():
+    productions = query(GET_ALL_PRODUCTIONS_WITH_CROPS)
+    return jsonify(productions)
+
+@bp.route("/<int:production_id>", methods=["DELETE"])
+def delete_production(production_id):
+    query(DELETE_PRODUCTION_CROPS, (production_id,), fetch="none")
+    query(DELETE_PRODUCTION, (production_id,), fetch="none")
+    return "", 204
