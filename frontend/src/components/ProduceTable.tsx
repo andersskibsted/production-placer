@@ -20,6 +20,7 @@ export function ProduceTable() {
 
     return (
         <div>
+        <h3>Check to see the development in yields for a given region from 2005-2025.</h3>
             <select onChange={(e) => setRegionId(Number(e.target.value))}>
                 <option value="">Select region</option>
                 {regions.map((r) => (
@@ -34,18 +35,18 @@ export function ProduceTable() {
             </select>
             <button onClick={handleFetch}>Fetch data</button>
             {error && <p>{error}</p>}
-            <table>
+            <table style={{ margin: '0 auto' }}>
                 <thead>
                     <tr>
                         <th>År</th>
-                        <th>Production (tonne)</th>
+                        <th>Production (tonnes)</th>
                     </tr>
                 </thead>
                 <tbody>
                     {data.map((row) => (
                         <tr key={row.year}>
                             <td>{row.year}</td>
-                            <td>{row.yield ?? "ingen data"}</td>
+                            <td>{row.yield ?? "no data"}</td>
                         </tr>
                     ))}
                 </tbody>

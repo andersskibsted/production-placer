@@ -36,8 +36,8 @@ Promise<RegionsWithAvailableProduce> {
 }
 
 export function fetchRegionsWithRequiredResources(requirements: CropSelection[]):
-Promise<{ regions: string[] }> {
-  return post<{ regions: string[] }>("/api/produce/", {
+Promise<{ regions: { name: string }[] }> {
+  return post<{ regions: { name: string }[] }>("/api/produce/", {
     requirements: requirements
   })
 }

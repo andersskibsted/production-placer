@@ -3,10 +3,17 @@ body {
   padding-top: 40px;
   padding-bottom: 100px;
 }
-h1, h2, h3 {
-  color: #1ebb23;
+h1 {
+  color: #fff203;
 }
-
+h2 {
+  color: #fbf7af;
+  font-size: 1.5rem;
+}
+h3 {
+  color: #fbf7af;
+  font-size: 1.2rem;
+}
 p {
   color: #ffffff;
 }
@@ -19,7 +26,7 @@ button {
   padding: 4px 8px;
   font-size: 16px;
   border-radius: 4px;
-  background-color: #bbaf0f;
+  background-color: #53c664;
   color: #000000;
 }
 
