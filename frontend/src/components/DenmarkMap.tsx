@@ -10,7 +10,7 @@ const REGION_IDS: Record<string, string> = {
 };
 
 const DEFAULT_COLOR = "#4ef1a7";
-const HIGHLIGHT_COLOR = "#4ef1a7";
+const HIGHLIGHT_COLOR = "#fff71c";
 
 export function DenmarkMap() {
   const { highlightedRegions } = useData();

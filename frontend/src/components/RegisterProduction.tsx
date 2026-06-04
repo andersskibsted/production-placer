@@ -37,13 +37,15 @@ export function RegisterProduction() {
 
   return (
     <div>
+      <h3>Add production to the database.</h3>
       <input
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        placeholder="The product being produced"
+        placeholder="Name of production"
       />
-        <div>
+      <h3>Select region you want to place your production.</h3>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "10px" }}>
           {regions.map((r) => (
             <label key={r.region_id}>
               <input
@@ -55,8 +57,8 @@ export function RegisterProduction() {
             </label>
           ))}
         </div>
-
-        <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+      <h3>Select the produce you need for your production.</h3>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "10px" }}>
           {crops.map((c) => (
             <label key={c.crop_id} style={{ width: "200px", display: "flex", alignItems: "center", gap: "6px" }}>
               <input
