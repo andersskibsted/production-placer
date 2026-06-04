@@ -12,6 +12,13 @@ export function RegisterProduction() {
   const [submittedName, setSubmittedName] = useState('')
   const [submittedRegion, setSubmittedRegion] = useState('')
 
+  const isValidProductionName = (pname: string): boolean => {
+    const regex = /^[A-Z]([a-z,A-Z]+\s?)*[0-9]*$/; // Requires capital starting letter followed by 0 or more letters with an optional whitespace. Lastly the name can be finised with a number.
+    const str_pname = String(pname);
+    console.log(str_pname);
+    return regex.test(str_pname);
+  };
+
   function toggleRegion(regionId: number) {
     setSelectedRegion([regionId])
   }
@@ -23,9 +30,10 @@ export function RegisterProduction() {
         : [...prev, cropId]
     )
   }
-
+  
   function handleSubmit() {
     if (!name || selectedRegion.length == 0) return
+    if (isValidProductionName(name)) {
     setError(null);
     setSubmittedName(name);
     setSubmittedRegion(selectedRegion);
@@ -33,6 +41,9 @@ export function RegisterProduction() {
     registerProduction(selectedRegion[0], selectedCrops, name)
       .then(() => setSuccess(true))
       .catch((err) => setError(err.message))
+    } else {
+      setError("Not a valid production name. Must start with a capital letter, not special symbols allowed and numbers are only allowed at the end.")
+    }
   }
 
   return (
