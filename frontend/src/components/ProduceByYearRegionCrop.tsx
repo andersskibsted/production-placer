@@ -21,6 +21,7 @@ export function ProduceSelector() {
     function handleFetch() {
       if (!regionId || !cropId || !year) return
       if (isValidYear(year)) {
+        setError(null)
         fetchProduceByYearRegionCrop(Number(year), regionId, cropId)
             .then(setData)
           .catch((err) => setError(err.message))
