@@ -2,7 +2,6 @@
 
 from flask import Blueprint, jsonify, request
 from db import query, get_db
-#from queries.products import GET_PRODUCT_ID
 from queries.productions import INSERT_PRODUCTION, INSERT_PRODUCTION_CROP, GET_ALL_PRODUCTIONS_WITH_CROPS, DELETE_PRODUCTION_CROPS, DELETE_PRODUCTION
 
 bp = Blueprint("productions", __name__, url_prefix="/api/productions")
