@@ -1,4 +1,5 @@
-import { get, post } from "./client"
+import { get, post, del } from "./client"
+import type { Productions } from "./types"
 
 export function registerProduction(regionId: number, cropId: number[], productName: string ):
 Promise<{ production_id: number }> {
@@ -9,8 +10,13 @@ Promise<{ production_id: number }> {
   })
 }
 
+export function fetchProductions(): Promise<Productions[]> {
+  return get<Productions[]>(`/api/productions/`)
+}
 
-
+export function deleteProduction(production_id: number): Promise<void> {
+  return del(`/api/productions/${production_id}`)
+}
 // export function fetchProductionByYear(year: number): Promise<ProductionByYear[]> {
 //     return get<ProductionByYear[]>(`/api/productions/${year}`)
 // }
