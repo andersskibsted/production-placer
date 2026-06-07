@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 from flask import Blueprint, jsonify, request
-#from backend.routes import crops
 from db import query
 from collections import defaultdict
 

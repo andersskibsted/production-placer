@@ -1,6 +1,5 @@
 import { get } from "./client"
-import type { ProduceByYear, ProduceYear, RegionsWithAvailableProduce, CropRequirements } from "./types"
-// import type { ProduceYear } from "./types"
+import type { ProduceByYear, ProduceYear, RegionsWithAvailableProduce, ProduceRegion } from "./types"
 import { post } from "./client"
 
 interface CropSelection {
@@ -25,7 +24,7 @@ export function fetchProduceByRegionCrop(regionId: number, cropId: number): Prom
 }
 
 export function fetchProduceByYearCrop(year: number, cropId: number): Promise<ProduceRegion[]> {
-  return get<ProductRegion[]>(`/api/produce/year/${year}/${cropId}`)
+  return get<ProduceRegion[]>(`/api/produce/year/${year}/${cropId}`)
 }
 
 export function fetchProductionRegions(cropIds: number[]):

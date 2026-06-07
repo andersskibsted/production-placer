@@ -11,7 +11,6 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 CORS(app, supports_credentials=False, always_send=True)
-#CORS(app)
 
 init_pool(app)
 app.teardown_appcontext(close_db)

@@ -1,14 +1,12 @@
-import { useState, useEffect } from "react"
-import { useData } from "../context/DataContext"
-import { fetchProductions } from "../api/productions"
+import { useData } from "../context/DataContext";
 
 export function ShowProduction() {
-  const { productions } = useData()
+    const { productions } = useData();
 
-  return (
-    <div>
-      <h3>Current productions.</h3>
-            <table style={{ margin: '0 auto' }}>
+    return (
+        <div>
+            <h3>Current productions.</h3>
+            <table style={{ margin: "0 auto" }}>
                 <thead>
                     <tr>
                         <th>Production ID</th>
@@ -19,20 +17,19 @@ export function ShowProduction() {
                 </thead>
                 <tbody>
                     {productions.map((row, index) => {
-                      const prev = productions[index - 1];
-                      const isDuplicate = prev && prev.id === row.id;
-                      return (
-                          <tr key={`${row.id}-${row.crop}`}>
-                              <td>{isDuplicate ? "" : row.id}</td>
-                              <td>{isDuplicate ? "" : row.name}</td>
-                              <td>{isDuplicate ? "" : row.region}</td>
-                              <td>{row.crop}</td>
-                          </tr>
-                      );
-                  })}
+                        const prev = productions[index - 1];
+                        const isDuplicate = prev && prev.id === row.id;
+                        return (
+                            <tr key={`${row.id}-${row.crop}`}>
+                                <td>{isDuplicate ? "" : row.id}</td>
+                                <td>{isDuplicate ? "" : row.name}</td>
+                                <td>{isDuplicate ? "" : row.region}</td>
+                                <td>{row.crop}</td>
+                            </tr>
+                        );
+                    })}
                 </tbody>
             </table>
-    </div>
-  )
-
+        </div>
+    );
 }
