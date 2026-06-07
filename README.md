@@ -20,6 +20,9 @@ Then ProductionPlacer is available in your prefered browser at
 http://localhost:5173
 ```
 
+# BE AWARE
+On macos there can be problems with the availability of port 5000. Apple AirPlay migt be using it. 
+It can be disabled in System Settings -> General/Generelt -> Airdrop and Continuity / Airdrop og Kontinuitet -> AirPlay Reciever / AirPlay modtager -> Turn it off .
 
 # ProductionPlacer how-to:
 It is based on production data of danish agriculture, from 2005-2025.
