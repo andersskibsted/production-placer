@@ -1,7 +1,7 @@
 # productionPlacer
-The new tool for enhancing coorporation between production of refined goods dependent on agricultural produce
+The new tool for enhancing coorporation between production of refined goods dependent on agricultural produce.
 
-To run, Docker is required.
+To run, Docker is required. Docker must be running in the background.
 From the root directory of the unzipped file, run:
 
 ```
